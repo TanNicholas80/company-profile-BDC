@@ -12,3 +12,147 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  UserID   String  @id @default(uuid())
+  email    String  @unique
+  nama     String
+  password String
+  no_telp  String  @unique
+  alamat   String
+  Foto     String?
+  role     Role    @default(USER)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Bisa NULL untuk soft delete
+
+  pasienInfo PasienInfo?
+  sessions   Sessions?
+  booking    Booking[]
+  rekamMedis RekamMedis[]
+}
+
+model Sessions {
+  SessionID String   @id @default(uuid())
+  userId    String   @unique
+  expiredAt DateTime
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Bisa NULL untuk soft delete
+
+  user User @relation(fields: [userId], references: [UserID])
+}
+
+model PasienInfo {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  NIK            String   @unique
+  no_BPJS        String?  @unique
+  jenis_kelamin  JK
+  golongan_darah Goldar
+  tgl_lahir      DateTime
+  alergi         String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Bisa NULL untuk soft delete
+
+  user User @relation(fields: [userId], references: [UserID])
+}
+
+model Booking {
+  BookID  String   @id @default(uuid())
+  userId  String   @unique
+  tanggal DateTime
+  jam     String
+  Dokter  String?
+  Layanan String
+  keluhan String
+  status  String
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+
+  rekamMedis RekamMedis?
+  user       User        @relation(fields: [userId], references: [UserID])
+}
+
+model RekamMedis {
+  RME_ID        String  @id @default(uuid())
+  userId        String  @unique
+  bookId        String  @unique
+  diagnosis     String
+  tindakan      String
+  resep         String
+  saran         String
+  lampiran_foto String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Bisa NULL untuk soft delete
+
+  user    User    @relation(fields: [userId], references: [UserID])
+  booking Booking @relation(fields: [bookId], references: [BookID])
+}
+
+model Notifikasi {
+  NotifID    String @id @default(uuid())
+  judulPesan String
+  pesan      String
+  jenisNotif String
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+}
+
+model Layanan {
+  LayananID        String @id @default(uuid())
+  namaLayanan      String
+  kategoriLayanan  String
+  deskripsiLayanan String
+  tujuanLayanan    String
+  hargaLayanan     String
+  tandaLayanan     String
+  waktuLayanan     String
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+}
+
+model Dokter {
+  DokterID            String @id @default(uuid())
+  namaDokter          String
+  pengalamanDokter    String
+  deskripsiDokter     String
+  spesialisasiLayanan String
+  availableHari       String
+  jamDokter           String
+  statusDokter        String
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+}
+
+enum JK {
+  Perempuan
+  Laki_Laki
+}
+
+enum Goldar {
+  A
+  B
+  O
+  AB
+  Tidak_Tahu
+}
+
+enum Role {
+  USER
+  ADMIN
+}
