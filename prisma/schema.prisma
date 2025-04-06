@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  UserID   String  @id @default(uuid())
-  email    String  @unique
-  nama     String
-  password String
-  no_telp  String  @unique
-  alamat   String
-  Foto     String?
-  role     Role    @default(USER)
+  UserID      String  @id @default(uuid())
+  email       String  @unique
+  nama        String
+  password    String
+  no_telp     String  @unique
+  alamat      String
+  Foto        String?
+  is_verified Boolean @default(false)
+  role        Role    @default(USER)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -29,6 +30,8 @@ model User {
 
   pasienInfo PasienInfo?
   sessions   Sessions?
+  verified Verified?
+  forgotPassword ForgotPassword?
   booking    Booking[]
   rekamMedis RekamMedis[]
 }
@@ -137,6 +140,32 @@ model Dokter {
   createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
   updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
   deletedAt DateTime? // Untuk soft delete (opsional)
+}
+
+model Verified {
+  verifiedId String   @id @default(uuid())
+  userId     String   @unique
+  token      String
+  expiredAt  DateTime
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+
+  user User @relation(fields: [userId], references: [UserID])
+}
+
+model ForgotPassword {
+  ForgotPasswordID String @id @default(uuid())
+  userId          String @unique
+  token           String
+  expiredAt       DateTime
+
+  createdAt DateTime  @default(now()) // Timestamp otomatis saat dibuat
+  updatedAt DateTime  @updatedAt // Timestamp otomatis saat update
+  deletedAt DateTime? // Untuk soft delete (opsional)
+
+  user User @relation(fields: [userId], references: [UserID])
 }
 
 enum JK {
