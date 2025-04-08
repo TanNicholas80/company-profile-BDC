@@ -81,7 +81,7 @@ const Navbar = () => {
         </ul>
 
         {/* Button Login Desktop */}
-        <Button asChild className='hidden lg:flex'>
+        <Button asChild className='hidden lg:flex bg-primary-red px-8 rounded-full hover:opacity-70 hover:bg-primary-red'>
           <Link href="/login">Masuk</Link>
         </Button>
 
@@ -125,7 +125,7 @@ const Navbar = () => {
                   </li>
                 ))}
                 <li>
-                  <Button asChild>
+                  <Button asChild className='bg-primary-red rounded-full px-8 hover:opacity-70 hover:bg-primary-red'>
                     <Link
                       href="/login"
                       onClick={() => setMenuOpen(false)}
