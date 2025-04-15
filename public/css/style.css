@@ -1,0 +1,184 @@
+/* Style For HERO SECTION Start Here */
+.hero-image-1 {
+  position: absolute;
+  bottom: -40px;
+  right: -65px;
+  min-height: 160px;
+  width: auto;
+  transition: transform 4s ease;
+}
+
+.banner-hero:hover .hero-image-1 {
+  animation: moveImageHero1 4s ease forwards;
+}
+
+.banner-hero:not(:hover) .hero-image-1 {
+  animation: moveImageHero1Reverse 4s ease forwards;
+}
+
+@keyframes moveImageHero1 {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(20%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(15%) rotate(20deg);
+  }
+}
+
+@keyframes moveImageHero1Reverse {
+  0% {
+    transform: translateX(15%) rotate(20deg);
+  }
+  50% {
+    transform: translateX(20%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.hero-image-2 {
+  position: absolute;
+  max-height: 50px;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%) rotate(220deg);
+  width: auto;
+  transition: transform 4s ease;
+}
+
+.banner-hero:hover .hero-image-2 {
+  animation: moveImageHero2 4s ease forwards;
+}
+
+.banner-hero:not(:hover) .hero-image-2 {
+  animation: moveImageHero2Reverse 4s ease forwards;
+}
+
+@keyframes moveImageHero2 {
+  0% {
+    transform: translateX(-50%) rotate(220deg);
+  }
+  50% {
+    transform: translateX(100%) rotate(280deg); /* Bergeser ke kanan + berputar */
+  }
+  100% {
+    transform: translateX(70%) rotate(250deg); /* Mundur sedikit tapi tidak kembali ke tempat awal */
+  }
+}
+
+@keyframes moveImageHero2Reverse {
+  0% {
+    transform: translateX(70%) rotate(250deg); /* Posisi akhir dari animasi forward */
+  }
+  50% {
+    transform: translateX(100%) rotate(280deg); /* Gerakan ke kanan dulu sebelum kembali */
+  }
+  100% {
+    transform: translateX(-50%) rotate(220deg); /* Kembali ke posisi awal */
+  }
+}
+
+.hero-image-3 {
+  position: absolute;
+  max-height: 100px;
+  top: 26px;
+  left: -20px;
+  transform: rotate(140deg);
+  width: auto;
+  transition: transform 4s ease;
+}
+
+.banner-hero:hover .hero-image-3 {
+  animation: moveImageHero3 4s ease forwards;
+}
+
+.banner-hero:not(:hover) .hero-image-3 {
+  animation: moveImageHero3Reverse 4s ease forwards;
+}
+
+@keyframes moveImageHero3 {
+  0% {
+    transform: translateY(0%) rotate(140deg);
+  }
+  50% {
+    transform: translateY(50%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(30%) rotate(170deg);
+  }
+}
+
+@keyframes moveImageHero3Reverse {
+  0% {
+    transform: translateY(30%) rotate(170deg);
+  }
+  50% {
+    transform: translateY(50%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0%) rotate(140deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-image-1 {
+    min-height: 280px;
+    right: -85px;
+  }
+
+  .hero-image-2 {
+    min-height: 96px;
+  }
+
+  .hero-image-3 {
+    min-height: 180px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .banner-hero {
+    height: 80vh;
+  }
+
+  .hero-image-1 {
+    min-height: 500px;
+    right: -105px;
+    bottom: -80px;
+  }
+
+  .hero-image-2 {
+    min-height: 180px;
+  }
+
+  .hero-image-3 {
+    min-height: 320px;
+    left: -40px;
+  }
+}
+/* Style For HERO SECTION End Here */
+
+/* Style For ABOUT SECTION Start Here */
+.about-hero {
+  position: relative;
+  background-image: url("../images/aboutBackground.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -50;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay hitam transparan */
+}
+/* Style For ABOUT SECTION End Here */
+
