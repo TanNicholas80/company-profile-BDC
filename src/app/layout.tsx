@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${notoSerif.variable} antialiased`}
       >
-        <main className="mt-24">
+        <main>
           {children}
         </main>
       </body>
