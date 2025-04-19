@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="">
+    <div className="mt-24">
       <Navbar />
 
       {/* Hero Section Start Here */}
