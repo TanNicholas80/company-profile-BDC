@@ -3,9 +3,9 @@ import Navbar from "./_components/Navbar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col px-16">
+    <div className="flex flex-col">
       <Navbar />
-      <div className="flex-1 p-6 bg-gray-100 mt-24">
+      <div className="flex-1">
         {children}
       </div>
       <Footer />
